@@ -1,0 +1,4 @@
+- ignore: {name: "Eta reduce"}
+- ignore: {name: "Use infix"}
+- ignore: {name: "Avoid lambda"}
+- ignore: {name: "Use newtype instead of data"}

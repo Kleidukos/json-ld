@@ -1,0 +1,114 @@
+cabal-version:      3.0
+name:               json-ld
+version:            0.1.0.0
+author:             Hécate Moonlight
+maintainer:         hecate+github@glitchbra.in
+tested-with:        GHC ==9.2
+extra-source-files:
+  CHANGELOG.md
+  README.md
+
+common options
+  ghc-options:
+    -Wall -Wcompat -Widentities -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints
+    -fhide-source-paths -Wno-unused-do-bind -fwrite-ide-info
+    -hiedir=.hie -haddock
+
+common extensions
+  default-extensions:
+    NoStarIsType
+    DataKinds
+    DeriveAnyClass
+    DerivingStrategies
+    DerivingVia
+    DuplicateRecordFields
+    LambdaCase
+    OverloadedLabels
+    OverloadedRecordDot
+    OverloadedStrings
+    PackageImports
+    PolyKinds
+    RecordWildCards
+    Strict
+    StrictData
+    TypeFamilies
+
+  default-language:   GHC2021
+
+library
+  import:          options
+  import:          extensions
+  visibility:      public
+  hs-source-dirs:  src
+  ghc-options:     -Wall
+  build-depends:
+    , aeson           ^>=2
+    , attoparsec      ^>=0.14
+    , base            ^>=4.16
+    , bcp47           ^>=0.2
+    , bytestring      ^>=0.11
+    , containers      ^>=0.6
+    , effectful       ^>=2.2
+    , http-client     ^>=0.7
+    , ip              ^>=1.7
+    , ptr
+    , rdf             ^>=0.1
+    , text            ^>=2.0
+    , text-builder    ^>=0.6
+    , text-display    ^>=0.0
+    , vector          ^>=0.13
+    , vector-builder  ^>=0.3
+
+  exposed-modules:
+    JSONLD
+    JSONLD.ContextProcessing
+    JSONLD.Types
+
+test-suite json-ld-test
+  import:         options
+  import:         extensions
+  type:           exitcode-stdio-1.0
+  main-is:        Main.hs
+  hs-source-dirs: test
+  ghc-options:    -rtsopts -threaded -with-rtsopts=-N
+  other-modules:
+    Test.Compaction
+    Test.Utils
+
+  build-depends:
+    , base
+    , containers
+    , effectful
+    , hedgehog
+    , json-ld
+    , optics-core
+    , tasty
+    , tasty-hunit
+    , text
+    , vector
+
+library iri
+  import:          options
+  import:          extensions
+  visibility:      public
+  hs-source-dirs:  src
+  ghc-options:     -Wall
+  exposed-modules:
+    IRI
+    IRI.CodePoint.Internal
+    IRI.CodePoint.RFC3986
+    IRI.CodePoint.RFC3987
+    IRI.Parser
+    IRI.Types
+
+  build-depends:
+    , attoparsec      ^>=0.14
+    , base            ^>=4.16
+    , bytestring      ^>=0.11
+    , ip              ^>=1.7
+    , ptr
+    , text            ^>=2.0
+    , text-builder    ^>=0.6
+    , vector          ^>=0.13
+    , vector-builder  ^>=0.3
