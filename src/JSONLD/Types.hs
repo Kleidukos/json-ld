@@ -11,7 +11,7 @@ module JSONLD.Types
   , mkCompactIRI
 
     -- ** Keyword
-  , Keyword
+  , Keyword (..)
   , fromText
 
     -- ** Expanded Term Definition
@@ -43,7 +43,7 @@ data TermDefinition
   | TDExpanded ExpandedTermDefinition
   deriving stock (Show, Ord, Eq)
 
-newtype ExpandedTermDefinition = ExpandedTermDefinition (Map Term Text)
+newtype ExpandedTermDefinition = ExpandedTermDefinition (Map Keyword Text)
   deriving newtype (Eq, Ord, Show)
 
 data EDTParseError
